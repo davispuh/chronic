@@ -37,7 +37,7 @@ module Chronic
       @precision = time.precision
       time_precision = true
       end
-      date = Chronic.time_class.new(year, month, day)
+      date = Chronic.time_class.local(year, month, day)
       end_year, end_month, end_day = year, month, day
       end_hour, end_minute, end_second = time.get_end
       if @count
@@ -153,11 +153,11 @@ module Chronic
             diff = Date::wday_diff(date, Date::DAYS[@options[:week_start]], modifier, sign)
             diff -= Date::WEEK_DAYS
             year, month, day = Date::add_day(year, month, day, diff)
-            date = Chronic.time_class.new(year, month, day)
+            date = Chronic.time_class.local(year, month, day)
             hour = minute = second = 0
           end
           unless modifier.zero? and @context == :past
-            end_date = Chronic.time_class.new(year, month, day)
+            end_date = Chronic.time_class.local(year, month, day)
             diff = Date::wday_diff(end_date, Date::DAYS[@options[:week_start]], modifier, sign)
             end_year, end_month, end_day = Date::add_day(year, month, day, diff + Date::WEEK_DAYS)
             end_hour = end_minute = end_second = 0
@@ -170,7 +170,7 @@ module Chronic
             hour = minute = second = 0
           end
           unless modifier.zero? and @context == :past
-            end_date = Chronic.time_class.new(year, month, day)
+            end_date = Chronic.time_class.local(year, month, day)
             diff = Date::wday_diff(end_date, Date::DAYS[@options[:week_start]], 1, 0)
             end_year, end_month, end_day = Date::add_day(year, month, day, diff)
             end_hour = end_minute = end_second = 0
@@ -182,7 +182,7 @@ module Chronic
             hour = minute = second = 0
           end
           if [year, month, day] != local_date or @context == :future
-            end_date = Chronic.time_class.new(year, month, day)
+            end_date = Chronic.time_class.local(year, month, day)
             diff = Date::wday_diff(end_date, Date::DAYS[:monday], 1, 1)
             end_year, end_month, end_day = Date::add_day(year, month, day, diff)
             end_hour = end_minute = end_second = 0
